@@ -14,7 +14,7 @@ public class Labirinto {
 	
 	/***
 	 * Questo metodo crea un labirinto, popolandolo di stanze.
-	 * Ciascuna stanza verrà eventualmente popolato di uno o più oggetti.
+	 * Ciascuna stanza verrà eventualmente popolata di uno o più attrezzi.
 	 */
 	private void creaLabirinto() {
 		/* crea gli attrezzi */
