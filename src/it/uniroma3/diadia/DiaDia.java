@@ -3,6 +3,8 @@ package it.uniroma3.diadia;
 import java.util.Scanner;
 
 import it.uniroma3.diadia.ambienti.Stanza;
+import it.uniroma3.diadia.comandi.Comando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -31,9 +33,11 @@ public class DiaDia {
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
 
 	private Partita partita;
+	private FabbricaDiComandiFisarmonica fabbricaComandi;
 
 	public DiaDia() {
 		this.partita = new Partita();
+		this.fabbricaComandi = new FabbricaDiComandiFisarmonica();
 	}
 
 	public void gioca() {
@@ -54,7 +58,10 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire = new Comando(istruzione);
+		Comando comandoDaEseguire = this.fabbricaComandi.costruisciComando(istruzione);
+		comandoDaEseguire.eseguiComando(this.partita);
+		return false;
+		/*Comando comandoDaEseguire = new Comando(istruzione);
 		if(comandoDaEseguire.sconosciuto())
 			return false;
 		if (comandoDaEseguire.getNome().equals("fine")) {
@@ -74,7 +81,7 @@ public class DiaDia {
 			System.out.println("Hai vinto!");
 			return true;
 		} else
-			return false;
+			return false;*/
 	}   
 
 	// implementazioni dei comandi dell'utente:

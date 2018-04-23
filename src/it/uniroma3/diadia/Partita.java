@@ -96,5 +96,9 @@ public class Partita {
 
 	public void setCfu(int cfu) {
 		this.giocatore.setCFU(cfu); 	
-	}	
+	}
+	
+	public Giocatore getGiocatore() {
+		return this.giocatore;
+	}
 }

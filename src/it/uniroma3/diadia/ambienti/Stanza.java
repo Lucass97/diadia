@@ -193,6 +193,10 @@ public class Stanza {
 	    return direzioni;
     }
 	
+	public int getNumeroAttrezzi() {
+		return this.numeroAttrezzi;
+	}
+	
 	@Override
 	public boolean equals(Object o) {
 		Stanza stanzaDaConfrontare = (Stanza) o;
