@@ -12,7 +12,7 @@ public class ComandoPosa implements Comando{
 	@Override
 	public void eseguiComando(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
-		Giocatore giocatore =partita.getGiocatore();
+		Giocatore giocatore = partita.getGiocatore();
 		Attrezzo attrezzoInBorsa = giocatore.prendiAttrezzoInBorsa(nomeAttrezzo);
 		if(attrezzoInBorsa == null)
 			System.out.println("Attrezzo " + nomeAttrezzo + " non presente in borsa");
@@ -23,6 +23,16 @@ public class ComandoPosa implements Comando{
 	@Override
 	public void setParametro(String parametro) {
 		this.nomeAttrezzo = parametro;	
+	}
+
+	@Override
+	public String getNome() {
+		return "posa";
+	}
+
+	@Override
+	public String getParametro() {
+		return this.nomeAttrezzo;
 	}
 	
 }

@@ -19,4 +19,14 @@ public class ComandoFine implements Comando {
 	public void setParametro(String parametro) {
 	}
 
+	@Override
+	public String getNome() {
+		return "fine";
+	}
+
+	@Override
+	public String getParametro() {
+		return null;
+	}
+
 }

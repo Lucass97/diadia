@@ -9,6 +9,7 @@ import it.uniroma3.diadia.Partita;
  * @versione 1.0
  */
 public class ComandoAiuto implements Comando{
+	
 	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
 
 	@Override
@@ -20,5 +21,15 @@ public class ComandoAiuto implements Comando{
 
 	@Override
 	public void setParametro(String parametro) {
+	}
+
+	@Override
+	public String getNome() {
+		return "aiuto";
+	}
+
+	@Override
+	public String getParametro() {
+		return null;
 	}
 }
