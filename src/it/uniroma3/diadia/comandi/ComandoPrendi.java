@@ -20,10 +20,14 @@ public class ComandoPrendi implements Comando{
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Giocatore giocatore = partita.getGiocatore();
 		Attrezzo attrezzoPreso = stanzaCorrente.getAttrezzo(this.nomeAttrezzo);
-		if(stanzaCorrente.removeAttrezzo(attrezzoPreso)) {
-			if(giocatore.posaAttrezzoInBorsa(attrezzoPreso))
-				System.out.println("Attrezzo "+ attrezzoPreso + " prelevato");
-		}else
+		if(attrezzoPreso != null) {
+			if(giocatore.posaAttrezzoInBorsa(attrezzoPreso)) {
+				if(stanzaCorrente.removeAttrezzo(attrezzoPreso))
+					System.out.println("Attrezzo "+ attrezzoPreso + " prelevato");
+			}else
+				System.out.println("Attrezzo troppo pesante! Non c'entra in borsa!");
+		}
+		else 
 			System.out.println("Non esiste alcun attrezzo " + this.nomeAttrezzo + " nella stanza " + stanzaCorrente.getNome());
 	}
 
