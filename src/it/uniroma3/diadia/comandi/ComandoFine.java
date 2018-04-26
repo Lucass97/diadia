@@ -8,9 +8,11 @@ import it.uniroma3.diadia.Partita;
  * @versione 1.0
  */
 public class ComandoFine implements Comando {
-
+	private static final String MEX_DI_USCITA = "Partita terminata... Grazie per aver giocato!";
+	
 	@Override
 	public void eseguiComando(Partita partita) {
+		System.out.println(MEX_DI_USCITA);
 		partita.setFinita();
 
 	}

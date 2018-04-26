@@ -15,7 +15,7 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
  * @author  docente di POO 
  *         (da un'idea di Michael Kolling and David J. Barnes) 
  *          
- * @version base
+ * @version 1.1
  */
 
 public class DiaDia {
@@ -48,7 +48,7 @@ public class DiaDia {
 		scannerDiLinee = new Scanner(System.in);		
 		do		
 			istruzione = scannerDiLinee.nextLine();
-		while (!processaIstruzione(istruzione));
+		while (this.processaIstruzione(istruzione));
 	}   
 
 
@@ -60,59 +60,10 @@ public class DiaDia {
 	private boolean processaIstruzione(String istruzione) {
 		Comando comandoDaEseguire = this.fabbricaComandi.costruisciComando(istruzione);
 		comandoDaEseguire.eseguiComando(this.partita);
-		return false;
-		/*Comando comandoDaEseguire = new Comando(istruzione);
-		if(comandoDaEseguire.sconosciuto())
+		if(comandoDaEseguire.getNome().equals("fine"))
 			return false;
-		if (comandoDaEseguire.getNome().equals("fine")) {
-			this.fine(); 
-			return true;
-		} else if (comandoDaEseguire.getNome().equals("vai"))
-			this.vai(comandoDaEseguire.getParametro());
-		else if(comandoDaEseguire.getNome().equals("prendi"))
-			partita.prendiAttrezzo(comandoDaEseguire.getParametro());
-		else if(comandoDaEseguire.getNome().equals("posa"))
-			partita.posaAttrezzo(comandoDaEseguire.getParametro());
-		else if (comandoDaEseguire.getNome().equals("aiuto"))
-			this.aiuto();
-		else
-			System.out.println("Comando sconosciuto");
-		if (this.partita.vinta()) {
-			System.out.println("Hai vinto!");
-			return true;
-		} else
-			return false;*/
+		return true;
 	}   
-
-	// implementazioni dei comandi dell'utente:
-
-	/**
-	 * Stampa informazioni di aiuto.
-	 */
-	private void aiuto() {
-		for(int i=0; i< elencoComandi.length; i++) 
-			System.out.print(elencoComandi[i]+" ");
-		System.out.println();
-	}
-
-	/**
-	 * Cerca di andare in una direzione. Se c'e' una stanza ci entra 
-	 * e ne stampa il nome, altrimenti stampa un messaggio di errore
-	 */
-	private void vai(String direzione) {
-		if(direzione==null)
-			System.out.println("Dove vuoi andare ?");
-		Stanza prossimaStanza = null;
-		prossimaStanza = this.partita.getStanzaCorrente().getStanzaAdiacente(direzione);
-		if (prossimaStanza == null)
-			System.out.println("Direzione inesistente");
-		else {
-			this.partita.setStanzaCorrente(prossimaStanza);
-			int cfu = this.partita.getCfu();
-			this.partita.setCfu(cfu--);
-		}
-		System.out.println(partita.getStanzaCorrente().getDescrizione());
-	}
 
 	/**
 	 * Comando "Fine".

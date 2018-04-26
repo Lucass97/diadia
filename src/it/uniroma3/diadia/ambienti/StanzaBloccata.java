@@ -27,7 +27,6 @@ public class StanzaBloccata extends Stanza {
 				return this;
 			}
 		}
-		
 		return super.getStanzaAdiacente(direzione);
 	}
 	

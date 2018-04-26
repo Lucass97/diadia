@@ -28,7 +28,6 @@ public class ComandoVai implements Comando {
 			return;
 		}
 		partita.setStanzaCorrente(prossimaStanza);
-		//System.out.println(partita.getStanzaCorrente().getNome());
 		partita.getGiocatore().setCFU(partita.getGiocatore().getCFU()-1);
 		System.out.println("Hai consumato un CFU ora te ne rimangono: " + partita.getCfu());
 
