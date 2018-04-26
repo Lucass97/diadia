@@ -29,8 +29,8 @@ public class PartitaTest {
 		this.aulaN11 = new Stanza("Aula N11");
 		
 		this.partita2.setStanzaCorrente(aulaN11);
-		this.partita2.setCfu(0);
-		this.partita3.setCfu(5);
+		this.partita2.getGiocatore().setCFU(0);
+		this.partita3.getGiocatore().setCFU(5);
 		this.partita3.setStanzaCorrente(biblioteca);
 	}
 
@@ -57,9 +57,9 @@ public class PartitaTest {
 	
 	@Test
 	public void testGetCFU(){
-		assertEquals(20, this.partita1.getCfu());
-		assertEquals(0, this.partita2.getCfu());
-		assertEquals(5, this.partita3.getCfu());
+		assertEquals(20, this.partita1.getGiocatore().getCFU());
+		assertEquals(0, this.partita2.getGiocatore().getCFU());
+		assertEquals(5, this.partita3.getGiocatore().getCFU());
 	}
 
 	@Test

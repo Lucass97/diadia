@@ -6,7 +6,9 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 /**
- * Questa modella il comando prendi
+ * Questa classe modella il comando prendi.
+ * Quando eseguito l'attrezzo desiderato sarà preso dalla stanza 
+ * e depositato nella borsa del giocatore.
  * @author Luca Gregori
  * @version 1.0
  * 
@@ -14,7 +16,7 @@ import it.uniroma3.diadia.giocatore.Giocatore;
 public class ComandoPrendi implements Comando{
 	
 	private String nomeAttrezzo;
-
+	
 	@Override
 	public void eseguiComando(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();

@@ -1,6 +1,7 @@
 package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
+
 /**
  * Questo comando modella il comando fine.
  * Quando eseguito la partita verrà terminata.
