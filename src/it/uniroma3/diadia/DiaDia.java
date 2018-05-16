@@ -75,5 +75,6 @@ public class DiaDia {
 	public static void main(String[] argc) {
 		DiaDia gioco = new DiaDia();
 		gioco.gioca();
+		s
 	}
 }
