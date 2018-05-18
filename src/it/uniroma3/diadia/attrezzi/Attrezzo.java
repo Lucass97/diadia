@@ -42,21 +42,32 @@ public class Attrezzo {
 		return this.peso;
 	}
 	
-	/*@Override
+	@Override
 	public boolean equals(Object o) {
 		Attrezzo attrezzoDaConfrontare = (Attrezzo) o;
 		if(this.nome.equals(attrezzoDaConfrontare.getNome()))
 			if(this.getPeso() == attrezzoDaConfrontare.getPeso())
 				return true;
 		return false;
-	}*/
+	}
+	
+	@Override
+	public int hashCode() {
+		return this.getNome().hashCode() + this.getPeso();
+	}
 
 	/**
 	 * Restituisce una rappresentazione stringa di questo attrezzo
 	 * @return la rappresentazione stringa
 	 */
+	@Override
 	public String toString() {
-		return this.getNome()+" ("+this.getPeso()+"kg)";
+		//return this.getNome()+" ("+this.getPeso()+"kg)";
+		return this.getNome() + ":" + this.getPeso();
+	}
+	
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 }

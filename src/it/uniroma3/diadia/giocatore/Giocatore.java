@@ -45,6 +45,10 @@ public class Giocatore {
 		return this.borsa.addAttrezzo(attrezzo);
 	}
 	
+	public String toStringBorsa() {
+		return this.borsa.toString();
+	}
+	
 	public Giocatore() {
 		this(CFU_INIZIALI);
 	}
