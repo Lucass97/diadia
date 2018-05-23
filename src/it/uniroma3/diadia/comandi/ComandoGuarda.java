@@ -2,15 +2,15 @@ package it.uniroma3.diadia.comandi;
 
 import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Giocatore;
 
 
 /**
  * Questa classe modella il comando guarda.
- * Quando eseguito verrà stampato su schermo tutte le informazione relativa alla stanza corrente
+ * Quando eseguito verrà stampato su schermo tutte le informazioni relative
+ * alla stanza corrente oppure alla borsa. Ciò che verrà stampato è deciso tramite parametro.
  * @author Luca Gregori
- * @version 1.0
+ * @version 1.3
  */
 public class ComandoGuarda implements Comando {
 	

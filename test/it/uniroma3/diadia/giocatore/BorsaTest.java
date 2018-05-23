@@ -14,23 +14,36 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.giocatore.Borsa;
 
 public class BorsaTest {
-    private Borsa borsa1;
-    private Borsa borsa2;
-    private Borsa borsa3;
-    private Borsa borsa4;
+	
+    private Borsa borsaVuota;
+    private Borsa borsaStandard;
+    private Borsa borsaCapiente;
+    
     private Attrezzo forbice;
     private Attrezzo fucile;
     private Attrezzo pala;
     private Attrezzo osso;
     private Attrezzo piccone;
     private Attrezzo mazza;
+    
+    /**
+     * Tre casi:
+     * this.borsaVuota -> senza attrezzi e capienza pari a 10 (standard)
+     * this.borsaStandard -> con qualche attrezzo e capienza pari a 10 (standard)
+     * this.borsaCapiente -> con qualche attrezzo e capienza pari a 20
+     * @throws Exception
+     */
 	@Before
 	public void setUp() throws Exception {
-		this.borsa1 = new Borsa(); //per default peso massimo = 10
-		this.borsa2 = new Borsa(); 
-		this.borsa3 = new Borsa(); //borsa vuota
-		this.borsa4 = new Borsa(20);
 		
+		/* Creazione borse */
+		this.borsaVuota = new Borsa(); // per default peso massimo = 10 
+		this.borsaStandard = new Borsa(); // per default peso massimo = 10
+		this.borsaCapiente = new Borsa(20); // peso massimo = 20
+		
+		/*===========================================================*/
+		
+		/* Inizializzazione attrezzi */
 		this.forbice = new Attrezzo("Forbice", 1);
 		this.fucile = new Attrezzo("Fucile", 5);
 		this.pala = new Attrezzo("Pala",2);
@@ -38,132 +51,175 @@ public class BorsaTest {
 		this.piccone = new Attrezzo("Piccone",2);
 		this.mazza = new Attrezzo("Mazza",2);
 		
-		this.borsa2.addAttrezzo(this.osso);
-		this.borsa2.addAttrezzo(this.forbice);
-		this.borsa2.addAttrezzo(this.piccone);
-		this.borsa2.addAttrezzo(this.pala);
+		/*===========================================================*/
 		
-		this.borsa4.addAttrezzo(this.forbice);
-		this.borsa4.addAttrezzo(this.fucile);
-		this.borsa4.addAttrezzo(this.pala);
-		this.borsa4.addAttrezzo(this.osso);
-		this.borsa4.addAttrezzo(this.piccone);
-		this.borsa4.addAttrezzo(this.mazza);
+		this.borsaStandard.addAttrezzo(this.osso);
+		this.borsaStandard.addAttrezzo(this.forbice);
+		this.borsaStandard.addAttrezzo(this.piccone);
+		this.borsaStandard.addAttrezzo(this.pala);
+		
+		this.borsaCapiente.addAttrezzo(this.forbice);
+		this.borsaCapiente.addAttrezzo(this.fucile);
+		this.borsaCapiente.addAttrezzo(this.pala);
+		this.borsaCapiente.addAttrezzo(this.osso);
+		this.borsaCapiente.addAttrezzo(this.piccone);
+		this.borsaCapiente.addAttrezzo(this.mazza);
+		
+		/*===========================================================*/
 	}
 
 	@Test
 	public void testAddAttrezzo() {
-		/* Test per borsa 1*/
-		assertTrue(this.borsa1.addAttrezzo(this.forbice));
-		assertTrue(this.borsa1.addAttrezzo(this.fucile));
-		assertTrue(this.borsa1.addAttrezzo(this.pala));
-		assertFalse(this.borsa1.addAttrezzo(this.osso)); //false perche supera il peso massimo
-		assertTrue(this.borsa1.addAttrezzo(this.mazza));
-		assertFalse(this.borsa1.addAttrezzo(this.piccone)); //false perche supera il peso massimo
+		/* Test per borsa vuota */
+		assertTrue(this.borsaVuota.addAttrezzo(this.forbice));
+		assertTrue(this.borsaVuota.addAttrezzo(this.fucile));
+		assertTrue(this.borsaVuota.addAttrezzo(this.pala));
+		assertFalse(this.borsaVuota.addAttrezzo(this.osso)); //false perche supera il peso massimo
+		assertTrue(this.borsaVuota.addAttrezzo(this.mazza));
+		assertFalse(this.borsaVuota.addAttrezzo(this.piccone)); //false perche supera il peso massimo
 	}
 
 	@Test
 	public void testGetAttrezzo() {
-		/* Test per borsa 2*/
-		assertSame(this.osso,this.borsa2.getAttrezzo("Osso"));
-		assertSame(this.forbice,this.borsa2.getAttrezzo("Forbice"));
-		assertSame(this.piccone,this.borsa2.getAttrezzo("Piccone"));
-		assertSame(this.pala,this.borsa2.getAttrezzo("Pala"));
-		assertNotSame(this.mazza,this.borsa2.getAttrezzo("Mazza"));
-		assertNotSame(this.fucile,this.borsa2.getAttrezzo("Fucile"));
+		/* Test per borsa standard*/
+		assertEquals(this.osso,this.borsaStandard.getAttrezzo("Osso"));
+		assertEquals(this.forbice,this.borsaStandard.getAttrezzo("Forbice"));
+		assertEquals(this.piccone,this.borsaStandard.getAttrezzo("Piccone"));
+		assertEquals(this.pala,this.borsaStandard.getAttrezzo("Pala"));
+		assertNull(this.borsaStandard.getAttrezzo("Mazza"));
+		assertNull(this.borsaStandard.getAttrezzo("Fucile"));
 	}
 
 	@Test
 	public void testIsEmpty() {
-		/* Test per borsa 2*/
-		assertFalse(borsa2.isEmpty());
-		assertTrue(borsa3.isEmpty());
+		/* Test per borsa vuota*/
+		assertTrue(borsaVuota.isEmpty());
+		
+		/*===========================================================*/
+		
+		/* Test per borsa standard e borsa capiente*/
+		assertFalse(borsaStandard.isEmpty());
+		assertFalse(borsaCapiente.isEmpty());
+		
+		/*===========================================================*/
+		
 	}
 
 	@Test
 	public void testHasAttrezzo() {
-		/* Test per borsa 2*/
-		assertTrue(this.borsa2.hasAttrezzo("Osso"));
-		assertTrue(this.borsa2.hasAttrezzo("Forbice"));
-		assertTrue(this.borsa2.hasAttrezzo("Piccone"));
-		assertTrue(this.borsa2.hasAttrezzo("Pala"));
-		assertFalse(this.borsa2.hasAttrezzo("Mazza"));
-		assertFalse(this.borsa2.hasAttrezzo("Fucile"));
-		
-		/* Test per borsa 3*/
-		assertFalse(this.borsa3.hasAttrezzo("Mazza"));
+		/* Test per borsa standard*/
+		assertTrue(this.borsaStandard.hasAttrezzo("Osso"));
+		assertTrue(this.borsaStandard.hasAttrezzo("Forbice"));
+		assertTrue(this.borsaStandard.hasAttrezzo("Piccone"));
+		assertTrue(this.borsaStandard.hasAttrezzo("Pala"));
+		assertFalse(this.borsaStandard.hasAttrezzo("Mazza"));
+		assertFalse(this.borsaStandard.hasAttrezzo("Fucile"));
 	}
 
 	@Test
 	public void testRemoveAttrezzo() {
 		
-		/* Test per borsa 3 */
-		assertNull(this.borsa3.removeAttrezzo("Mazza"));
+		/* Test per borsa vuota */
+		assertNull(this.borsaVuota.removeAttrezzo("Mazza"));
 		
-		/* Test per borsa 4 */
-		assertSame(this.forbice,this.borsa4.removeAttrezzo("Forbice"));
-		assertFalse(this.borsa4.hasAttrezzo("Forbice"));
+		/*===========================================================*/
 		
-		assertSame(this.osso,this.borsa4.removeAttrezzo("Osso"));
-		assertFalse(this.borsa4.hasAttrezzo("Osso"));
+		/* Test per borsa standard */
+		assertEquals(this.forbice,this.borsaStandard.removeAttrezzo("Forbice"));
+		assertNull(this.borsaStandard.removeAttrezzo("Forbice"));
 		
-		assertSame(this.fucile,this.borsa4.removeAttrezzo("Fucile"));
-		assertFalse(this.borsa4.hasAttrezzo("Fucile"));
+		assertEquals(this.osso,this.borsaStandard.removeAttrezzo("Osso"));
+		assertNull(this.borsaStandard.removeAttrezzo("Osso"));
+		
+		assertEquals(this.piccone,this.borsaStandard.removeAttrezzo("Piccone"));
+		assertNull(this.borsaStandard.removeAttrezzo("Piccone"));
+		
+		assertNull(this.borsaStandard.removeAttrezzo("Fucile"));
+		
+		/*===========================================================*/
+		
+		/* Test per borsa capiente */
+		assertEquals(this.forbice,this.borsaCapiente.removeAttrezzo("Forbice"));
+		assertNull(this.borsaCapiente.removeAttrezzo("Forbice"));
+		
+		assertEquals(this.osso,this.borsaCapiente.removeAttrezzo("Osso"));
+		assertNull(this.borsaCapiente.removeAttrezzo("Osso"));
+		
+		assertEquals(this.fucile,this.borsaCapiente.removeAttrezzo("Fucile"));
+		assertNull(this.borsaCapiente.removeAttrezzo("Fucile"));
+		
+		/*===========================================================*/
 		
 	}
+	
 	@Test
 	public void testGetContenutoOrdinatoPerPeso() {
-		List<Attrezzo> listaOrdinata = this.borsa4.getContenutoOrdinatoPerPeso();
+		/* Test per borsa capiente */
+		List<Attrezzo> listaOrdinata = this.borsaCapiente.getContenutoOrdinatoPerPeso();
 		Iterator<Attrezzo> iteratoreAttrezzi = listaOrdinata.iterator();
-		assertEquals(this.forbice, iteratoreAttrezzi.next());
-		assertEquals(this.mazza, iteratoreAttrezzi.next());
-		assertEquals(this.pala, iteratoreAttrezzi.next());
-		assertEquals(this.piccone, iteratoreAttrezzi.next());
-		assertEquals(this.osso, iteratoreAttrezzi.next());
-		assertEquals(this.fucile, iteratoreAttrezzi.next());
+		
+		assertEquals(this.forbice, iteratoreAttrezzi.next()); //Forbice:1
+		assertEquals(this.mazza, iteratoreAttrezzi.next()); //Mazza:2
+		assertEquals(this.pala, iteratoreAttrezzi.next()); //Pala:2
+		assertEquals(this.piccone, iteratoreAttrezzi.next()); //Piccone:2
+		assertEquals(this.osso, iteratoreAttrezzi.next()); //Osso:3
+		assertEquals(this.fucile, iteratoreAttrezzi.next()); //Fucile:5
+		
 		System.out.println("testGetContenutoOrdinatoPerPeso() \n\t-> " + listaOrdinata + "\n");
 	}
 	
 	@Test
 	public void testGetContenutoOrdinatoPerNome() {
-		SortedSet<Attrezzo> insiemeOrdinato = this.borsa4.getContenutoOrdinatoPerNome();
+		/* Test per borsa capiente */
+		SortedSet<Attrezzo> insiemeOrdinato = this.borsaCapiente.getContenutoOrdinatoPerNome();
 		Iterator<Attrezzo> iteratoreAttrezzi = insiemeOrdinato.iterator();
-		assertEquals(this.forbice, iteratoreAttrezzi.next());
-		assertEquals(this.fucile, iteratoreAttrezzi.next());
-		assertEquals(this.mazza, iteratoreAttrezzi.next());
-		assertEquals(this.osso, iteratoreAttrezzi.next());
-		assertEquals(this.pala, iteratoreAttrezzi.next());
-		assertEquals(this.piccone, iteratoreAttrezzi.next());
+		
+		assertEquals(this.forbice, iteratoreAttrezzi.next()); //Forbice:1
+		assertEquals(this.fucile, iteratoreAttrezzi.next()); //Fucile:5
+		assertEquals(this.mazza, iteratoreAttrezzi.next()); //Mazza:2
+		assertEquals(this.osso, iteratoreAttrezzi.next()); //Osso:3
+		assertEquals(this.pala, iteratoreAttrezzi.next()); //Pala:2
+		assertEquals(this.piccone, iteratoreAttrezzi.next()); //Piccone:2
+		
 		System.out.println("testGetContenutoOrdinatoPerNome() \n\t-> " + insiemeOrdinato + "\n");
 	}
 	
 	@Test
 	public void testGetContenutoRaggruppatoPerPeso() {
-		Map<Integer,Set<Attrezzo>> raggruppamento = this.borsa4.getContenutoRaggruppatoPerPeso();
+		/* Test per borsa capiente */
+		Map<Integer,Set<Attrezzo>> raggruppamento = this.borsaCapiente.getContenutoRaggruppatoPerPeso();
 		Iterator<Attrezzo> iteratoreAttrezziConStessoPeso;
+		
+		/* Gruppo con peso 1 */
 		iteratoreAttrezziConStessoPeso = raggruppamento.get(1).iterator();
-		assertEquals(this.forbice, iteratoreAttrezziConStessoPeso.next());
+		assertEquals(this.forbice, iteratoreAttrezziConStessoPeso.next()); //Forbice:1
+		/* Gruppo con peso 2 */
 		iteratoreAttrezziConStessoPeso = raggruppamento.get(2).iterator();
-		assertEquals(this.mazza, iteratoreAttrezziConStessoPeso.next());
-		assertEquals(this.pala, iteratoreAttrezziConStessoPeso.next());
-		assertEquals(this.piccone, iteratoreAttrezziConStessoPeso.next());
+		assertEquals(this.mazza, iteratoreAttrezziConStessoPeso.next()); //Mazza:2
+		assertEquals(this.pala, iteratoreAttrezziConStessoPeso.next()); //Pala:2
+		assertEquals(this.piccone, iteratoreAttrezziConStessoPeso.next()); //Piccone:2
+		/* Gruppo con peso 3 */
 		iteratoreAttrezziConStessoPeso = raggruppamento.get(3).iterator();
-		assertEquals(this.osso, iteratoreAttrezziConStessoPeso.next());
+		assertEquals(this.osso, iteratoreAttrezziConStessoPeso.next()); //Osso:3
+		/* Gruppo con peso 5 */
 		iteratoreAttrezziConStessoPeso = raggruppamento.get(5).iterator();
-		assertEquals(this.fucile, iteratoreAttrezziConStessoPeso.next());
+		assertEquals(this.fucile, iteratoreAttrezziConStessoPeso.next()); //Fucile:5
+		
 		System.out.println("testGetContenutoRaggruppatoPerPeso() \n\t-> " + raggruppamento + "\n");
 	}
 	
 	@Test
 	public void testGetSortedSetOrdinatoPerPeso(){
-		SortedSet<Attrezzo> insiemeOrdinato = this.borsa4.getSortedSetOrdinatoPerPeso();
+		/* Test per borsa capiente */
+		SortedSet<Attrezzo> insiemeOrdinato = this.borsaCapiente.getSortedSetOrdinatoPerPeso();
 		Iterator<Attrezzo> iteratoreAttrezzi = insiemeOrdinato.iterator();
-		assertEquals(this.forbice, iteratoreAttrezzi.next());
-		assertEquals(this.mazza, iteratoreAttrezzi.next());
-		assertEquals(this.pala, iteratoreAttrezzi.next());
-		assertEquals(this.piccone, iteratoreAttrezzi.next());
-		assertEquals(this.osso, iteratoreAttrezzi.next());
-		assertEquals(this.fucile, iteratoreAttrezzi.next());
+		
+		assertEquals(this.forbice, iteratoreAttrezzi.next()); //Forbice:1
+		assertEquals(this.mazza, iteratoreAttrezzi.next()); //Mazza:2
+		assertEquals(this.pala, iteratoreAttrezzi.next()); //Pala:2
+		assertEquals(this.piccone, iteratoreAttrezzi.next()); //Piccone:2
+		assertEquals(this.osso, iteratoreAttrezzi.next()); //Osso:3
+		assertEquals(this.fucile, iteratoreAttrezzi.next()); //Fucile:5
 		System.out.println("testGetSortedSetOrdinatoPerPeso() \n\t-> " + insiemeOrdinato + "\n");
 	}
 

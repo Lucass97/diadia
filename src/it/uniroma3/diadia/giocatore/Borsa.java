@@ -115,6 +115,7 @@ public class Borsa {
 
 	public String toString() {
 		if(!this.isEmpty()) {
+			System.out.println("Contenuto borsa: ");
 			return this.getContenutoOrdinatoPerPeso().toString();
 		}
 		else return "Borsa vuota";
@@ -130,9 +131,9 @@ public class Borsa {
 	}
 	
 	/**
-	 * restituisce la lista degli attrezzi nella borsa ordinati per peso e
+	 * Restituisce la lista degli attrezzi nella borsa ordinati per peso e
 	 * quindi, a parità di peso, per nome.
-	 * @return una lista di attrezzi.
+	 * @return una lista di attrezzi ordinata per peso.
 	 */
 	public List<Attrezzo> getContenutoOrdinatoPerPeso() {
 		List<Attrezzo> listaAttrezzi = new ArrayList<Attrezzo>(this.attrezzi);
@@ -143,7 +144,7 @@ public class Borsa {
 	
 	/**
 	 * Restituisce l'insieme degli attrezzi ordinati per nome.
-	 * @return un insieme ordinato.
+	 * @return un insieme di attrezzi ordinato per nome.
 	 */
 	public SortedSet<Attrezzo> getContenutoOrdinatoPerNome(){
 		ComparatoreAttrezziPerNome comp = new ComparatoreAttrezziPerNome();
@@ -153,9 +154,9 @@ public class Borsa {
 	}
 	
 	/**
-	 * restituisce un insieme degli attrezzi nella borsa ordinati per peso e
+	 * Restituisce un insieme degli attrezzi nella borsa ordinati per peso e
 	 * quindi, a parità di peso, per nome.
-	 * @return un insieme ordinato.
+	 * @return un insieme di attrezzi ordinato per peso.
 	 */
 	public SortedSet<Attrezzo> getSortedSetOrdinatoPerPeso(){
 		ComparatoreAttrezziPerPeso comp = new ComparatoreAttrezziPerPeso();
@@ -165,9 +166,9 @@ public class Borsa {
 	}
 	
 	/**
-	 * restituisce una mappa che associa un intero (rappresentante un
+	 * Restituisce una mappa che associa un intero (rappresentante un
 	 * peso) con l’insieme (comunque non vuoto) degli attrezzi di tale
-     * peso: tutti gli attrezzi dell'insieme che fgura come valore hanno
+     * peso: tutti gli attrezzi dell'insieme che figura come valore hanno
      * lo stesso peso pari all'intero che figura come chiave.
 	 * @return una mappa ordinata.
 	 */

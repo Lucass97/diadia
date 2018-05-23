@@ -1,8 +1,6 @@
 package it.uniroma3.diadia.ambienti;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,7 +42,10 @@ public class Stanza {
      * @param stanza - stanza adiacente nella direzione indicata dal primo parametro.
      */
     public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-    	this.stanzeAdiacenti.put(direzione, stanza);
+    	if(this.stanzeAdiacenti.size() == NUMERO_MASSIMO_DIREZIONI)
+    		return;
+    	else
+    		this.stanzeAdiacenti.put(direzione, stanza);
     }
 
     /**
