@@ -8,44 +8,31 @@ import it.uniroma3.diadia.ambienti.Stanza;
  * Quando eseguito il giocatore si sposterà nella stanza adiacente a quella corrente,
  * indicata tramite il parametro direzione.
  * @author Luca Gregori
- * @versione 1.0
+ * @versione 1.1
  */
-public class ComandoVai implements Comando {
-	
-	private String direzione;
+public class ComandoVai extends AbstractComando {
 
 	@Override
-	public void eseguiComando(Partita partita) {
+	public String eseguiComando(Partita partita) {
+		
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Stanza prossimaStanza = null;
-		if(this.direzione == null) {
-			System.out.println("Dove vuoi andare? Devi specificare una direzione");
-			return;
-		}
-		prossimaStanza = stanzaCorrente.getStanzaAdiacente(this.direzione);
-		if(prossimaStanza == null) {
-			System.out.println("Direzione inesistente");
-			return;
-		}
+		if(this.getParametro() == null)
+			return "Dove vuoi andare? Devi specificare una direzione";
+		
+		prossimaStanza = stanzaCorrente.getStanzaAdiacente(this.getParametro());
+		if(prossimaStanza == null)
+			return "Direzione inesistente";
+		
 		partita.setStanzaCorrente(prossimaStanza);
 		partita.getGiocatore().setCFU(partita.getGiocatore().getCFU()-1);
-		System.out.println("Hai consumato un CFU ora te ne rimangono: " + partita.getGiocatore().getCFU());
+		return "Hai consumato un CFU ora te ne rimangono: " + partita.getGiocatore().getCFU();
 
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.direzione = parametro;
 	}
 
 	@Override
 	public String getNome() {
 		return "vai";
-	}
-
-	@Override
-	public String getParametro() {
-		return this.direzione;
 	}
 
 }

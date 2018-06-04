@@ -10,49 +10,33 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * Quando eseguito verrà stampato su schermo tutte le informazioni relative
  * alla stanza corrente oppure alla borsa. Ciò che verrà stampato è deciso tramite parametro.
  * @author Luca Gregori
- * @version 1.3
+ * @version 1.4
  */
-public class ComandoGuarda implements Comando {
-	
-	private String parametro;
-	
-	@Override
-	public void eseguiComando(Partita partita) {
-		
-		if(parametro == null) {
-			System.out.println("Per favore specifica cosa guardare... stanza o borsa?");
-			return;
-		}
-		switch(this.parametro) {
-			case "stanza": 
-				Stanza stanzaCorrente = partita.getStanzaCorrente();
-				System.out.println("Ti trovi nella seguente stanza: " + stanzaCorrente.getNome());
-				System.out.println("Descrizione stanza: " + stanzaCorrente.getDescrizione());
-				break;
-			case "borsa":
-				Giocatore giocatore = partita.getGiocatore();
-				System.out.println(giocatore.toStringBorsa());
-				break;
-			default:
-				System.out.println(this.parametro + ", parametro non corretto... "
-						+ "Per favore usa stanza o borsa");
-				break;
-		}
-	}
+public class ComandoGuarda extends AbstractComando {
 
 	@Override
-	public void setParametro(String parametro) {
-		this.parametro = parametro;
+	public String eseguiComando(Partita partita) {
+
+		if(this.getParametro() == null) {
+			return "Per favore specifica cosa guardare... stanza o borsa?";
+		}
+		switch(this.getParametro()) {
+		case "stanza": 
+			Stanza stanzaCorrente = partita.getStanzaCorrente();
+			return "Ti trovi nella seguente stanza: " + stanzaCorrente.getNome() + 
+					"\nDescrizione stanza: " + stanzaCorrente.getDescrizione();
+		case "borsa":
+			Giocatore giocatore = partita.getGiocatore();
+			return giocatore.toStringBorsa();
+		default:
+			return this.getParametro() + ", parametro non corretto... "
+			+ "Per favore usa stanza o borsa";
+		}
 	}
 
 	@Override
 	public String getNome() {
 		return "guarda";
-	}
-
-	@Override
-	public String getParametro() {
-		return null;
 	}
 
 }

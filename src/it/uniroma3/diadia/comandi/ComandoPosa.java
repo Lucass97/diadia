@@ -10,37 +10,26 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * Quando eseguito l'attrezzo desiderato sarà preso dalla borsa del giocatore 
  * e depositato nella stanza.
  * @author Luca Gregori
- * @version 1.0
+ * @version 1.1
  * 
  */
-public class ComandoPosa implements Comando{
-	
-	private String nomeAttrezzo;
+public class ComandoPosa extends AbstractComando{
 
 	@Override
-	public void eseguiComando(Partita partita) {
+	public String eseguiComando(Partita partita) {
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Giocatore giocatore = partita.getGiocatore();
-		Attrezzo attrezzoInBorsa = giocatore.prendiAttrezzoInBorsa(nomeAttrezzo);
+		Attrezzo attrezzoInBorsa = giocatore.prendiAttrezzoInBorsa(this.getParametro());
 		if(attrezzoInBorsa == null)
-			System.out.println("Attrezzo " + nomeAttrezzo + " non presente in borsa");
+			return "Attrezzo " + this.getParametro() + " non presente in borsa";
 		else if(stanzaCorrente.addAttrezzo(attrezzoInBorsa))
-			System.out.println("Attrezzo " + nomeAttrezzo + " posato");
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;	
+			return "Attrezzo " + this.getParametro() + " posato";
+		else return null;
 	}
 
 	@Override
 	public String getNome() {
 		return "posa";
-	}
-
-	@Override
-	public String getParametro() {
-		return this.nomeAttrezzo;
 	}
 	
 }

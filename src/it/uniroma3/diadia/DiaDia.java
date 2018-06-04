@@ -1,10 +1,8 @@
 package it.uniroma3.diadia;
 
-import java.util.Scanner;
-
-import it.uniroma3.diadia.ambienti.Stanza;
-import it.uniroma3.diadia.comandi.Comando;
-import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
+import it.uniroma3.diadia.comandi.AbstractComando;
+import it.uniroma3.diadia.comandi.FabbricaDiComandi;
+import it.uniroma3.diadia.comandi.FabbricaDiComandiRiflessiva;
 
 /**
  * Classe principale di diadia, un semplice gioco di ruolo ambientato al dia.
@@ -15,7 +13,7 @@ import it.uniroma3.diadia.comandi.FabbricaDiComandiFisarmonica;
  * @author  docente di POO 
  *         (da un'idea di Michael Kolling and David J. Barnes) 
  *          
- * @version 1.1
+ * @version 1.2
  */
 
 public class DiaDia {
@@ -29,25 +27,22 @@ public class DiaDia {
 			"puoi raccoglierli, usarli, posarli quando ti sembrano inutili\n" +
 			"o regalarli se pensi che possano ingraziarti qualcuno.\n\n"+
 			"Per conoscere le istruzioni usa il comando 'aiuto'.";
-	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
 
 	private Partita partita;
-	private FabbricaDiComandiFisarmonica fabbricaComandi;
+	private InterfacciaUtente interfacciaUtente;
+	private FabbricaDiComandi fabbricaComandi;
 
 	public DiaDia() {
 		this.partita = new Partita();
-		this.fabbricaComandi = new FabbricaDiComandiFisarmonica();
+		this.interfacciaUtente = new InterfacciaUtenteConsole();
+		this.fabbricaComandi = new FabbricaDiComandiRiflessiva();
 	}
 
 	public void gioca() {
+		this.interfacciaUtente.mostraMessaggio(MESSAGGIO_BENVENUTO);
 		String istruzione; 
-		Scanner scannerDiLinee;
-
-		System.out.println(MESSAGGIO_BENVENUTO);
-		scannerDiLinee = new Scanner(System.in);		
 		do		
-			istruzione = scannerDiLinee.nextLine();
+			istruzione = this.interfacciaUtente.prendiIstruzione();
 		while (this.processaIstruzione(istruzione));
 	}   
 
@@ -58,10 +53,16 @@ public class DiaDia {
 	 * @return true se l'istruzione e' eseguita e il gioco continua, false altrimenti
 	 */
 	private boolean processaIstruzione(String istruzione) {
-		Comando comandoDaEseguire = this.fabbricaComandi.costruisciComando(istruzione);
-		comandoDaEseguire.eseguiComando(this.partita);
-		if(comandoDaEseguire.getNome().equals("fine"))
-			return false;
+		AbstractComando comandoDaEseguire;
+		try {
+			comandoDaEseguire = this.fabbricaComandi.costruisciComando(istruzione);
+			String msgComando = comandoDaEseguire.eseguiComando(this.partita);
+			this.interfacciaUtente.mostraMessaggio(msgComando);
+			if(comandoDaEseguire.getNome().equals("fine"))
+				return false;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return true;
 	}   
 

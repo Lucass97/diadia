@@ -6,21 +6,19 @@ import it.uniroma3.diadia.Partita;
  * Questa classe modella il comando aiuto.
  * Quando eseguito verrà stampato su schermo l'elenco dei comandi disponibili
  * @author Luca Gregori
- * @versione 1.0
+ * @versione 1.1
  */
-public class ComandoAiuto implements Comando{
+public class ComandoAiuto extends AbstractComando{
 	
-	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa"};
+	static final private String[] elencoComandi = {"vai", "aiuto", "fine", "prendi", "posa","saluta", "interagisci", "guarda" };
 
 	@Override
-	public void eseguiComando(Partita partita) {
+	public String eseguiComando(Partita partita) {
+		
+		StringBuilder stringBuilder = new StringBuilder();
 		for(int i=0; i< elencoComandi.length; i++) 
-			System.out.print(elencoComandi[i]+" ");
-		System.out.println();
-	}
-
-	@Override
-	public void setParametro(String parametro) {
+			stringBuilder.append((elencoComandi[i]+" "));
+		return stringBuilder.toString();
 	}
 
 	@Override
@@ -28,8 +26,4 @@ public class ComandoAiuto implements Comando{
 		return "aiuto";
 	}
 
-	@Override
-	public String getParametro() {
-		return null;
-	}
 }

@@ -6,30 +6,21 @@ import it.uniroma3.diadia.Partita;
  * Questo comando modella il comando fine.
  * Quando eseguito la partita verrà terminata.
  * @author Luca Gregori
- * @versione 1.0
+ * @versione 1.1
  */
-public class ComandoFine implements Comando {
+public class ComandoFine extends AbstractComando {
+	
 	private static final String MEX_DI_USCITA = "Partita terminata... Grazie per aver giocato!";
 	
 	@Override
-	public void eseguiComando(Partita partita) {
-		System.out.println(MEX_DI_USCITA);
+	public String eseguiComando(Partita partita) {
 		partita.setFinita();
-
-	}
-
-	@Override
-	public void setParametro(String parametro) {
+		return MEX_DI_USCITA;
 	}
 
 	@Override
 	public String getNome() {
 		return "fine";
-	}
-
-	@Override
-	public String getParametro() {
-		return null;
 	}
 
 }

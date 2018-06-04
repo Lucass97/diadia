@@ -10,42 +10,34 @@ import it.uniroma3.diadia.giocatore.Giocatore;
  * Quando eseguito l'attrezzo desiderato sarà preso dalla stanza 
  * e depositato nella borsa del giocatore.
  * @author Luca Gregori
- * @version 1.0
+ * @version 1.1
  * 
  */
-public class ComandoPrendi implements Comando{
-	
-	private String nomeAttrezzo;
+public class ComandoPrendi extends AbstractComando{
 	
 	@Override
-	public void eseguiComando(Partita partita) {
+	public String eseguiComando(Partita partita) {
+		
+		StringBuilder stringBuilder = new StringBuilder();
 		Stanza stanzaCorrente = partita.getStanzaCorrente();
 		Giocatore giocatore = partita.getGiocatore();
-		Attrezzo attrezzoPreso = stanzaCorrente.getAttrezzo(this.nomeAttrezzo);
+		Attrezzo attrezzoPreso = stanzaCorrente.getAttrezzo(this.getParametro());
 		if(attrezzoPreso != null) {
 			if(giocatore.posaAttrezzoInBorsa(attrezzoPreso)) {
 				if(stanzaCorrente.removeAttrezzo(attrezzoPreso))
-					System.out.println("Attrezzo "+ attrezzoPreso + " prelevato");
-			}else
-				System.out.println("Attrezzo troppo pesante! Non c'entra in borsa!");
+					stringBuilder.append("Attrezzo "+ attrezzoPreso + " prelevato");
+			}
+			else
+				stringBuilder.append("Attrezzo troppo pesante! Non c'entra in borsa!");
 		}
 		else 
-			System.out.println("Non esiste alcun attrezzo " + this.nomeAttrezzo + " nella stanza " + stanzaCorrente.getNome());
-	}
-
-	@Override
-	public void setParametro(String parametro) {
-		this.nomeAttrezzo = parametro;
+			stringBuilder.append("Non esiste alcun attrezzo " + this.getParametro() + " nella stanza " + stanzaCorrente.getNome());
+		return stringBuilder.toString();
 	}
 
 	@Override
 	public String getNome() {
 		return "prendi";
-	}
-
-	@Override
-	public String getParametro() {
-		return this.nomeAttrezzo;
 	}
 
 }
