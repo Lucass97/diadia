@@ -1,0 +1,11 @@
+Stanze:bibliotec bloccata,N10 magica,N12 buia,N56
+Inizio:N10
+Vincente:N12
+Attrezzi:martello 10 bibliotec,pinza 2 N10
+Uscite:bibliotec nord N10,bibliotec sud N12,N10 nord N12
+Blocchi:bibliotec nord piediporco
+Buie:N12 lanterna
+Magiche:N10 12
+Personaggi:merlino presentazione Mago N12,lella presentazione Strega N10, fido presentazione cane blibliotec
+Maghi: N12 attrezzoRegalato 2
+Cani: blibliotec ciboPreferito attrezzoRegalato 2

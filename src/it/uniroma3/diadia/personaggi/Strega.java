@@ -8,6 +8,10 @@ public class Strega extends AbstractPersonaggio {
 	private static final String MESSAGGIO_AGISCI = "Cosa c'è?";
 	private static final String MESSAGGIO_REGAlO = "Poof! Ahahahahhahaha";
 
+	public Strega() {
+		super();
+	}
+	
 	public Strega(String nome, String presentazione) {
 		super(nome, presentazione);
 	}

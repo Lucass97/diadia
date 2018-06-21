@@ -21,12 +21,16 @@ import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 
 public class Stanza {
 	
-	static final private int NUMERO_MASSIMO_DIREZIONI = 4;
+	static final private String NOME_DEFAULT = "stanza";
 	
 	private String nome;
     private List<Attrezzo> attrezzi;
-    private Map<String,Stanza> stanzeAdiacenti;
+    private Map<Direzione,Stanza> stanzeAdiacenti;
     private AbstractPersonaggio personaggio;
+    
+    public Stanza() {
+    	this(NOME_DEFAULT);
+    }
     
     /**
      * Crea una stanza. Non ci sono stanze adiacenti, non ci sono attrezzi.
@@ -43,11 +47,11 @@ public class Stanza {
      * @param direzione - direzione in cui sara' posta la stanza adiacente.
      * @param stanza - stanza adiacente nella direzione indicata dal primo parametro.
      */
-    public void impostaStanzaAdiacente(String direzione, Stanza stanza) {
-    	if(this.stanzeAdiacenti.size() == NUMERO_MASSIMO_DIREZIONI)
+    public void impostaStanzaAdiacente(Direzione dir, Stanza stanza) {
+    	if(this.stanzeAdiacenti.size() == Direzione.values().length)
     		return;
     	else
-    		this.stanzeAdiacenti.put(direzione, stanza);
+    		this.stanzeAdiacenti.put(dir, stanza);
     }
 
     /**
@@ -55,7 +59,7 @@ public class Stanza {
      * @param direzione - usata come parametro di ricerca.
      * @return la stanza corrispondente alla direzione, null se non esiste.
      */
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
         return this.stanzeAdiacenti.get(direzione);
 	}
 
@@ -66,7 +70,11 @@ public class Stanza {
     public String getNome() {
         return this.nome;
     }
-
+    
+    public void setNome(String nome) {
+    	this.nome = nome;
+    }
+    
     /**
      * Restituisce la descrizione della stanza.
      * @return la descrizione della stanza.
@@ -101,7 +109,7 @@ public class Stanza {
     	StringBuilder risultato = new StringBuilder();
     	risultato.append(this.nome);
     	risultato.append("\nUscite: ");
-    	for (String direzione : this.stanzeAdiacenti.keySet()) {
+    	for (Direzione direzione : this.stanzeAdiacenti.keySet()) {
     		risultato.append(" " + direzione);
     	}
     	risultato.append("\nAttrezzi nella stanza: ");
@@ -147,7 +155,7 @@ public class Stanza {
 	 * Questo metodo restituisce l'insieme delle direzione disponibili attualmente.
 	 * @return un insieme di direzioni.
 	 */
-	public Set<String> getDirezioni() {
+	public Set<Direzione> getDirezioni() {
 		return this.stanzeAdiacenti.keySet();
     }
 	

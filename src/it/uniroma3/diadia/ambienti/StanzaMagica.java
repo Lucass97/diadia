@@ -14,8 +14,18 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
  */
 public class StanzaMagica extends Stanza {
 	
+	private static final String NOME_DEFAULT = "N90";
 	private int contatoreAttrezziPosati;
 	private int sogliaMagica;
+	
+	public int getSogliaMagica() {
+		return sogliaMagica;
+	}
+
+	public void setSogliaMagica(int sogliaMagica) {
+		this.sogliaMagica = sogliaMagica;
+	}
+
 	private static final int SOGLIA_MAGICA_DEFAULT = 2;
 	
 	private Attrezzo modificaAttrezzo(Attrezzo attrezzo) {
@@ -33,6 +43,10 @@ public class StanzaMagica extends Stanza {
 		if(this.contatoreAttrezziPosati > this.sogliaMagica)
 			attrezzo = this.modificaAttrezzo(attrezzo);
 		return super.addAttrezzo(attrezzo);
+	}
+	
+	public StanzaMagica() {
+		this(NOME_DEFAULT);
 	}
 	
 	public StanzaMagica(String nome) {

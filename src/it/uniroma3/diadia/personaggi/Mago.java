@@ -4,13 +4,26 @@ import it.uniroma3.diadia.Partita;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public class Mago extends AbstractPersonaggio { 
-
+	
+	private static final Attrezzo ATTREZZO_DEFAULT = new Attrezzo("bacchetta",1);
+	
 	private static final String MESSAGGIO_DONO = "Sei un vero simpaticone, " + "con una mia magica azione, troverai un nuovo oggetto " + "per il tuo borsone!"; 
 	private static final String MESSAGGIO_SCUSE = "Mi spiace, ma non ho piu' nulla..."; 
 	private static final String MESSAGGIO_REGAlO_ACCETTATO = "Bidibodibu!";
 	private static final String MESSAGGIO_REGALO_RIFIUTATO = "Non mi hai dato nulla!!";
 	private Attrezzo attrezzo; 
 	
+	public Attrezzo getAttrezzo() {
+		return attrezzo;
+	}
+	public void setAttrezzo(Attrezzo attrezzo) {
+		this.attrezzo = attrezzo;
+	}
+	
+	public Mago() {
+		super();
+		this.attrezzo = ATTREZZO_DEFAULT;
+	}
 	public Mago(String nome, String presentazione, Attrezzo attrezzo) {
 		super(nome, presentazione); 
 		this.attrezzo = attrezzo; 

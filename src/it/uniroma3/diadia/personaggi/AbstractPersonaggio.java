@@ -5,9 +5,15 @@ import it.uniroma3.diadia.attrezzi.Attrezzo;
 
 public abstract class AbstractPersonaggio {
 	
+	private final static String NOME_DEFAULT = "mario";
+	private final static String PRESENTAZIONE_DEFAULT = "bella!";
 	private String nome; 
 	private String presentazione; 
 	private boolean haSalutato; 
+	
+	public AbstractPersonaggio() { 
+		this(NOME_DEFAULT,PRESENTAZIONE_DEFAULT);
+	}
 	
 	public AbstractPersonaggio(String nome, String presentazione) { 
 		this.nome = nome;
@@ -17,8 +23,19 @@ public abstract class AbstractPersonaggio {
 	
 	public String getNome() {
 		return this.nome; 
-	} 
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
 	
+	public String getPresentazione() {
+		return presentazione;
+	}
+
+	public void setPresentazione(String presentazione) {
+		this.presentazione = presentazione;
+	}
+
 	public boolean haSalutato() { 
 		return this.haSalutato; 
 	}

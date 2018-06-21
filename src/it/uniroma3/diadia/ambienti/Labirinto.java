@@ -1,4 +1,7 @@
 package it.uniroma3.diadia.ambienti;
+import java.io.FileNotFoundException;
+
+import it.uniroma3.diadia.CaricatoreLabirinto;
 import it.uniroma3.diadia.attrezzi.Attrezzo;
 import it.uniroma3.diadia.personaggi.AbstractPersonaggio;
 import it.uniroma3.diadia.personaggi.Cane;
@@ -37,22 +40,22 @@ public class Labirinto {
 		Stanza atrio = new Stanza("Atrio");
 		Stanza aulaN11 = new StanzaMagica("Aula N11");
 		Stanza aulaN10 = new StanzaBuia("Aula N10");
-		Stanza laboratorio = new StanzaBloccata("Laboratorio Campus","ovest");
+		Stanza laboratorio = new StanzaBloccata("Laboratorio Campus",Direzione.OVEST);
 		Stanza biblioteca = new Stanza("Biblioteca");
 		
 		/* collega le stanze */
-		atrio.impostaStanzaAdiacente("nord", biblioteca);
-		atrio.impostaStanzaAdiacente("est", aulaN11);
-		atrio.impostaStanzaAdiacente("sud", aulaN10);
-		atrio.impostaStanzaAdiacente("ovest", laboratorio);
-		aulaN11.impostaStanzaAdiacente("est", laboratorio);
-		aulaN11.impostaStanzaAdiacente("ovest", atrio);
-		aulaN10.impostaStanzaAdiacente("nord", atrio);
-		aulaN10.impostaStanzaAdiacente("est", aulaN11);
-		aulaN10.impostaStanzaAdiacente("ovest", laboratorio);
-		laboratorio.impostaStanzaAdiacente("est", atrio);
-		laboratorio.impostaStanzaAdiacente("ovest", aulaN11);
-		biblioteca.impostaStanzaAdiacente("sud", atrio);
+		atrio.impostaStanzaAdiacente(Direzione.NORD, biblioteca);
+		atrio.impostaStanzaAdiacente(Direzione.SUD, aulaN11);
+		atrio.impostaStanzaAdiacente(Direzione.SUD, aulaN10);
+		atrio.impostaStanzaAdiacente(Direzione.OVEST, laboratorio);
+		aulaN11.impostaStanzaAdiacente(Direzione.EST, laboratorio);
+		aulaN11.impostaStanzaAdiacente(Direzione.OVEST, atrio);
+		aulaN10.impostaStanzaAdiacente(Direzione.NORD, atrio);
+		aulaN10.impostaStanzaAdiacente(Direzione.EST, aulaN11);
+		aulaN10.impostaStanzaAdiacente(Direzione.OVEST, laboratorio);
+		laboratorio.impostaStanzaAdiacente(Direzione.EST, atrio);
+		laboratorio.impostaStanzaAdiacente(Direzione.OVEST, aulaN11);
+		biblioteca.impostaStanzaAdiacente(Direzione.SUD, atrio);
 
         /* pone gli attrezzi nelle stanze */
 		aulaN10.addAttrezzo(lanterna);
@@ -85,6 +88,19 @@ public class Labirinto {
 	}
 	
 	public Labirinto() {
-		this.creaLabirinto();
+		//this.creaLabirinto();
+		CaricatoreLabirinto c;
+		try {
+			 c = new CaricatoreLabirinto("labirinto.txt");
+				this.stanzaIniziale = c.getStanzaIniziale();
+				this.stanzaFinale = c.getStanzaVincente();
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if(this.stanzaIniziale != null)
+			System.out.println(this.stanzaIniziale);
+		else
+			System.out.println("null");
 	}
 }

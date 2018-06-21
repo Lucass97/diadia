@@ -1,0 +1,11 @@
+Stanze:atrio,n13 bloccata,laboratorio,n11,ds1 buia,ds2,biblioteca,n15 magica
+Inizio:atrio
+Vincente:laboratorio
+Attrezzi:osso 2 ds1,polpetta 2 ds1,droga 1 biblioteca,bistecca 2 n15
+Uscite:atrio nord n13,atrio ovest n11,atrio sud biblioteca,atrio est n15,n11 est atrio,n11 nord ds1,n11 nord ds1,n11 ovest ds2,ds1 sud n11,ds2 est n11,biblioteca nord atrio,n15 ovest atrio,n13 sud atrio,n13 nord laboratorio,laboratorio sud n13
+Blocchi:n13 nord piediporco
+Buie:ds1 lanterna
+Magiche:n15 2
+Personaggi:merlino Sono-un-mago-tuttofare-se-serve-qualcosa-chiedi-pure. mago n11,mandragora Ihihih!-Accetta-il-mio-aiuto-e-ne-uscirai-vivo-da-qui. strega biblioteca, balto Sono-un-cane-parlante-qualche-problema? cane ds2 
+Maghi: n11 lanterna 2
+Cani: ds2 polpetta ocropideip 2

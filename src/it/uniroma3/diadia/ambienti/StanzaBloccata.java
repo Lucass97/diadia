@@ -10,14 +10,31 @@ package it.uniroma3.diadia.ambienti;
  */
 public class StanzaBloccata extends Stanza {
 	
-	private String direzioneBloccata;
+	private Direzione direzioneBloccata;
+	
+	public Direzione getDirezioneBloccata() {
+		return direzioneBloccata;
+	}
+
+	public void setDirezioneBloccata(Direzione direzioneBloccata) {
+		this.direzioneBloccata = direzioneBloccata;
+	}
+
+	public String getAttrezzoPerSbloccare() {
+		return attrezzoPerSbloccare;
+	}
+
+	public void setAttrezzoPerSbloccare(String attrezzoPerSbloccare) {
+		this.attrezzoPerSbloccare = attrezzoPerSbloccare;
+	}
 	private String attrezzoPerSbloccare;
 	
-	private static final String DIREZIONE_BLOCCATA_DEFAULT = "nord";
+	private static final String NOME_DEFAULT = "bloccata";
+	private static final Direzione DIREZIONE_BLOCCATA_DEFAULT = Direzione.NORD;
 	private static final String ATTREZZO_PER_SBLOCCARE_DEFAULT = "piediporco";
 	
 	@Override
-	public Stanza getStanzaAdiacente(String direzione) {
+	public Stanza getStanzaAdiacente(Direzione direzione) {
 		
 		if(this.direzioneBloccata.equals(direzione)) {
 			if(super.hasAttrezzo(this.attrezzoPerSbloccare))
@@ -30,13 +47,16 @@ public class StanzaBloccata extends Stanza {
 		return super.getStanzaAdiacente(direzione);
 	}
 	
+	public StanzaBloccata() {
+		this(NOME_DEFAULT);
+	}
 	public StanzaBloccata(String nome) {
 		this(nome,DIREZIONE_BLOCCATA_DEFAULT,ATTREZZO_PER_SBLOCCARE_DEFAULT);
 	}
-	public StanzaBloccata(String nome,String direzioneBloccata) {
+	public StanzaBloccata(String nome,Direzione direzioneBloccata) {
 		this(nome,direzioneBloccata,ATTREZZO_PER_SBLOCCARE_DEFAULT);
 	}
-	public StanzaBloccata(String nome, String direzioneBloccata, String attrezzoPerSbloccare) {
+	public StanzaBloccata(String nome, Direzione direzioneBloccata, String attrezzoPerSbloccare) {
 		super(nome);
 		this.direzioneBloccata = direzioneBloccata;
 		this.attrezzoPerSbloccare = attrezzoPerSbloccare;

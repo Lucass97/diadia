@@ -60,6 +60,14 @@ public class DiaDia {
 			this.interfacciaUtente.mostraMessaggio(msgComando);
 			if(comandoDaEseguire.getNome().equals("fine"))
 				return false;
+			if(this.partita.vinta()) {
+					this.interfacciaUtente.mostraMessaggio("Complimenti hai vinto!!!");
+					return false;
+				}
+			if(this.partita.gameOver()) {
+				this.interfacciaUtente.mostraMessaggio("Game over! hai finito i CFU!");
+				return false;
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

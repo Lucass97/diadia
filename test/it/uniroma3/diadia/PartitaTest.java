@@ -5,6 +5,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import it.uniroma3.diadia.Partita;
+import it.uniroma3.diadia.ambienti.Direzione;
 import it.uniroma3.diadia.ambienti.Stanza;
 
 public class PartitaTest {
@@ -25,7 +26,7 @@ public class PartitaTest {
 		
 		this.biblioteca = new Stanza("Biblioteca");
 		this.atrio = new Stanza("Atrio");
-		atrio.impostaStanzaAdiacente("est", aulaN11);
+		atrio.impostaStanzaAdiacente(Direzione.convertString("est"), aulaN11);
 		this.aulaN11 = new Stanza("Aula N11");
 		
 		this.partita2.setStanzaCorrente(aulaN11);

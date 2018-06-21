@@ -11,6 +11,7 @@ package it.uniroma3.diadia.ambienti;
 public class StanzaBuia extends Stanza {
 	private String attrezzoPerVedere;
 	private static final String ATTREZZO_PER_VEDERE_DEFAULT = "lanterna";
+	private static final String NOME_DEFAULT = "N89";
 	
 	@Override
 	public String getDescrizione() {
@@ -20,6 +21,10 @@ public class StanzaBuia extends Stanza {
 			return "Qui c'è buio pesto!";
 	}
 	
+	public StanzaBuia() {
+		this(NOME_DEFAULT);
+	}
+	
 	public StanzaBuia(String nome) {
 		this(nome,ATTREZZO_PER_VEDERE_DEFAULT);
 	}
@@ -27,6 +32,14 @@ public class StanzaBuia extends Stanza {
 	public StanzaBuia(String nome, String attrezzoPerVedere) {
 		super(nome);
 		this.attrezzoPerVedere = attrezzoPerVedere;
+	}
+
+	public void setAttrezzoPerVedere(String attrezzoPerIlluminare) {
+		this.attrezzoPerVedere = attrezzoPerIlluminare;
+	}
+	
+	public String getAttrezzoPerVedere() {
+		return this.attrezzoPerVedere;
 	}
 
 }

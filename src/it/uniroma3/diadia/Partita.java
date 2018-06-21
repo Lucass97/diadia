@@ -53,6 +53,11 @@ public class Partita {
 	public boolean isFinita() {
 		return finita || vinta() || (this.giocatore.getCFU() == 0);
 	}
+	
+	public boolean gameOver() {
+		this.setFinita();
+		return this.giocatore.getCFU() == 0;
+	}
 
 	/**
 	 * Imposta la partita come finita
